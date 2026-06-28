@@ -62,6 +62,14 @@ start32:
   movw    %ax, %gs                # -> GS
 
   # Set up the stack pointer and call into C.
+  # 0x07C00 ─── 栈顶 (初始)
+  #            ↓ 栈向下增长 ~1KB (实际用量)
+  # 0x07800 ─── 栈实际底部
+  #             ... ~28KB 空闲 ...
+  # 0x00500 ─── BIOS 数据区结束
+  # 0x00400 ─── BIOS 数据区 (256B)
+  # 0x00000 ─── 中断向量表 (1KB)
+  # 这里把栈顶设置为 $start， $start 的取值取决于 Makefile:106行-Ttext 0x7C00参数 
   movl    $start, %esp
   call    bootmain
 

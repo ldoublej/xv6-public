@@ -43,6 +43,7 @@ bootmain(void)
 
   // Call the entry point from the ELF header.
   // Does not return!
+  // 调用内核入口点 entry.S:entry
   entry = (void(*)(void))(elf->entry);
   entry();
 }
