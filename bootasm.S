@@ -70,6 +70,7 @@ start32:
   # 0x00400 ─── BIOS 数据区 (256B)
   # 0x00000 ─── 中断向量表 (1KB)
   # 这里把栈顶设置为 $start， $start 的取值取决于 Makefile:106行-Ttext 0x7C00参数 
+  # https://www.ruanyifeng.com/blog/2015/09/0x7c00.html
   movl    $start, %esp
   call    bootmain
 

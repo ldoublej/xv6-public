@@ -102,6 +102,8 @@ mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)
 
 // This table defines the kernel's mappings, which are present in
 // every process's page table.
+
+// data是代码段和只读段界限在kernel.ld定义
 static struct kmap {
   void *virt;
   uint phys_start;

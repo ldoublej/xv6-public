@@ -17,7 +17,11 @@ extern char end[]; // first address after kernel loaded from ELF file
 int
 main(void)
 {
+  // xv6是平坦模型，虚拟地址等价线性地址
+  // 此刻已经开启来分页，不能再操作物理地址，end是链接器生产的一个符号，已经是虚拟地址了
+  // end = 0x80000000 +  内核所有可加载段在内存中的总大小（含 .bss 的零填充）
   kinit1(end, P2V(4*1024*1024)); // phys page allocator
+
   kvmalloc();      // kernel page table
   mpinit();        // detect other processors
   lapicinit();     // interrupt controller
